@@ -40,10 +40,27 @@ Before using this project, ensure you have:
 
 ### 1. Clone and Install
 
+Clone this project into the root of your T3 app directory (the CDK builds Docker from the parent folder):
+
 ```bash
-git clone https://github.com/lifeike/create-t3-aws-cdk.git
-cd create-t3-aws-cdk
+cd your-t3-app
+git clone https://github.com/lifeike/create-t3-aws-cdk.git cdk
+cd cdk
 npm install
+```
+
+Your directory structure should look like:
+
+```
+your-t3-app/
+├── src/
+├── public/
+├── Dockerfile
+├── package.json
+└── cdk/              <-- this project
+    ├── bin/
+    ├── lib/
+    └── package.json
 ```
 
 ### 2. Configure Your Settings
