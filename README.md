@@ -1,6 +1,10 @@
 # Create T3 App AWS CDK Starter Kit
 
-A production-ready AWS CDK infrastructure starter kit for deploying [create.t3.app](https://create.t3.gg/) (T3 Stack) applications to AWS.
+A production-ready AWS CDK infrastructure starter kit for deploying [create.t3.app](https://create.t3.gg/) (T3 Stack) applications to AWS. Deploy your full-stack app with a single command: `npx cdk deploy`.
+
+**GitHub:** https://github.com/lifeike/create-t3-aws-cdk
+
+**Maintained by:** [Feeco](https://github.com/lifeike)
 
 ## What Does This Project Do?
 
