@@ -21,18 +21,21 @@ This project provides Infrastructure as Code (IaC) using AWS CDK to deploy your 
 Before using this project, ensure you have:
 
 ### Tools
+
 - [Node.js](https://nodejs.org/) (v18 or later)
 - [AWS CLI](https://aws.amazon.com/cli/) (v2)
 - [AWS CDK CLI](https://docs.aws.amazon.com/cdk/latest/guide/cli.html) (`npm install -g aws-cdk`)
 - [Docker](https://www.docker.com/) (for building container images)
 
 ### AWS Setup
+
 - An AWS account with appropriate permissions
 - AWS CLI configured with credentials (`aws configure`)
 - A Route53 hosted zone for your domain (if using custom domain)
 - CDK bootstrapped in your account (`cdk bootstrap aws://ACCOUNT-ID/REGION`)
 
 ### Your T3 App
+
 - A T3 Stack application created with `create-t3-app`
 - A `Dockerfile` in your app's root directory
 
@@ -68,10 +71,12 @@ your-t3-app/
 Update the following files with your configuration:
 
 **`lib/stacks/service-stack.ts`**
+
 - Update `domainName` to your domain
 - Update the Route53 hosted zone lookup to your domain
 
 **`lib/constructs/compute.ts`**
+
 - Replace placeholder secrets with your actual values or move to AWS Secrets Manager:
   - `AUTH_SECRET`: Generate with `openssl rand -base64 32`
   - `AUTH_GITHUB_ID` / `AUTH_GITHUB_SECRET`: From GitHub OAuth App settings
@@ -79,6 +84,7 @@ Update the following files with your configuration:
 - Update `AUTH_URL` to your domain
 
 **`bin/cdk.ts`**
+
 - Update `codecommitRepoName` to your repository name
 
 ### 3. Deploy
@@ -104,36 +110,37 @@ git push codecommit main
 
 This CDK stack creates the following AWS resources:
 
-| Resource | Service | Description |
-|----------|---------|-------------|
-| VPC | Amazon VPC | 2 AZs with public, private, and isolated subnets |
-| NAT Instance | EC2 (t4g.nano) | Cost-effective NAT for private subnet egress |
-| ECS Cluster | Amazon ECS | Container orchestration cluster |
-| Fargate Service | ECS Fargate | Serverless container runtime (256 CPU, 512MB RAM) |
-| Load Balancer | ALB | Application Load Balancer with HTTPS |
-| Database | RDS PostgreSQL | PostgreSQL 16.3 on t4g.micro (20-100GB GP3) |
-| SSL Certificate | ACM | Managed SSL/TLS certificate |
-| DNS Record | Route53 | A record pointing to the load balancer |
-| CI/CD Pipeline | CodePipeline | Automated build and deployment pipeline |
-| Build Project | CodeBuild | Docker image builds with layer caching |
-| Logs | CloudWatch | Application logs with 7-day retention |
+| Resource        | Service        | Description                                       |
+| --------------- | -------------- | ------------------------------------------------- |
+| VPC             | Amazon VPC     | 2 AZs with public, private, and isolated subnets  |
+| NAT Instance    | EC2 (t4g.nano) | Cost-effective NAT for private subnet egress      |
+| ECS Cluster     | Amazon ECS     | Container orchestration cluster                   |
+| Fargate Service | ECS Fargate    | Serverless container runtime (256 CPU, 512MB RAM) |
+| Load Balancer   | ALB            | Application Load Balancer with HTTPS              |
+| Database        | RDS PostgreSQL | PostgreSQL 16.3 on t4g.micro (20-100GB GP3)       |
+| SSL Certificate | ACM            | Managed SSL/TLS certificate                       |
+| DNS Record      | Route53        | A record pointing to the load balancer            |
+| CI/CD Pipeline  | CodePipeline   | Automated build and deployment pipeline           |
+| Build Project   | CodeBuild      | Docker image builds with layer caching            |
+| Logs            | CloudWatch     | Application logs with 7-day retention             |
 
 ### Estimated Monthly Cost
 
 For a minimal deployment (1 Fargate task, t4g.micro RDS):
+
 - ~$15-30/month (varies by region and usage)
 
 ## Useful Commands
 
-| Command | Description |
-|---------|-------------|
-| `npm run build` | Compile TypeScript to JavaScript |
-| `npm run watch` | Watch for changes and compile |
-| `npm run test` | Run Jest unit tests |
-| `npx cdk synth` | Generate CloudFormation template |
-| `npx cdk diff` | Compare deployed stack with current state |
-| `npx cdk deploy` | Deploy stack to AWS |
-| `npx cdk destroy` | Remove all resources |
+| Command           | Description                               |
+| ----------------- | ----------------------------------------- |
+| `npm run build`   | Compile TypeScript to JavaScript          |
+| `npm run watch`   | Watch for changes and compile             |
+| `npm run test`    | Run Jest unit tests                       |
+| `npx cdk synth`   | Generate CloudFormation template          |
+| `npx cdk diff`    | Compare deployed stack with current state |
+| `npx cdk deploy`  | Deploy stack to AWS                       |
+| `npx cdk destroy` | Remove all resources                      |
 
 ## Contributing
 
